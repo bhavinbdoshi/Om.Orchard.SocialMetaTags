@@ -1,0 +1,28 @@
+﻿@model Om.Orchard.SocialMetaTags.Models.AuthorshipMetaTagsPart
+
+@if (Model.GoogleTagsSettings.RenderOutput) {
+    <fieldset>
+        <legend>Authorship Meta Tags</legend>
+        @if (Model.GoogleTagsSettings.AuthorRelTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.GPAuthorProfileUrl, T("Google+ Profile Url"))
+                @Html.TextBoxFor(m => m.GPAuthorProfileUrl, new { @class = "text large" })
+                <span class="hint">@T("Url for rel=author meta tag")</span>
+            </div>
+        }
+        @if (Model.GoogleTagsSettings.PublisherRelTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.GPPublisherProfileUrl, T("Google+ Business Page Url"))
+
+                @if (Model.GoogleTagsSettings.PublisherRelTagAllowOverWrite) {
+                    @Html.TextBoxFor(m => m.GPPublisherProfileUrl, new { @class = "text large" })
+                }
+                else {
+                    var presetUrl = String.IsNullOrWhiteSpace(Model.GPPublisherProfileUrl) ? Model.GoogleTagsSettings.PublisherRelTagPageUrl : Model.GPPublisherProfileUrl;
+                    @Html.TextBoxFor(m => m.GPPublisherProfileUrl, new { @class = "text large", @readonly = "readonly", @Value = presetUrl })     
+                }
+                <span class="hint">@T("Page Url for rel=publisher meta tag")</span>
+            </div>
+        }
+    </fieldset>
+}

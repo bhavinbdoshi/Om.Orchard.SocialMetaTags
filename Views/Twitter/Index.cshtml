@@ -1,0 +1,105 @@
+﻿@model Om.Orchard.SocialMetaTags.ViewModels.TwitterIndexViewModel
+@{ 
+    Layout.Title = T("Social Meta Tags");
+    Style.Include("om-orchard-social-tags-admin.css");
+    Script.Require("jQuery");
+    Script.Include("social-tags-admin.js").AtFoot();
+}
+<h2>@T("Twitter Summary Cards Meta Tags for Sharing on Twitter")</h2>
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend></legend>
+        <table class="items">
+            <colgroup>
+                <col id="Col1" />
+                <col id="Col2" />
+                <col id="Col3" />
+                <col id="Col4" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">@T("Twitter Summary Cards Meta Tags")</th>
+                    <th scope="col">@T("Enabled")</th>
+                    <th scope="col">@T("Required")</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:card</span>" content={@T("summary or summary_large_image")} /&gt;
+                    <span class="hint">@T("Allows author to select either summary card or summary_large_image card type")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardTypeTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardTypeTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:title</span>" content={@T("Title for Content")} /&gt
+                    <span class="hint">@T("Allows author to enter title for content")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardTitleTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardTitleTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:description</span>" content={@T("Description for content")} /&gt
+                    <span class="hint">@T("Allows author to enter description for content")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardDescriptionTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardDescriptionTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:image</span>" content={@T("Image Link for content")} /&gt
+                    <span class="hint">@T("Allows author to specify image url")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardImageTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardImageTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:creator</span>" content={@T("Twitter Handle for content creator")} /&gt
+                    <span class="hint">@T("Allows author to spcify twitter handle")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardCreatorTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardDescriptionTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta name="<span class="boldTag">twitter:site</span>" content={@T("Twitter Handle for site/business")} /&gt
+                    <span class="hint">@T("Adds Twitter Handle for Site/Business")</span>
+                    <fieldset>
+                        <legend>@T("Set default twitter handle value for Site")</legend>
+                        @Html.LabelFor(m => m.CardSiteTagValue, T("Site Twitter Handle"))
+                        @Html.TextBoxFor(m => m.CardSiteTagValue, new { @class = "text" })
+                        <span class="hint">@T("Twitter Handle for Site. For example: @nytimes")</span>
+                        @Html.CheckBoxFor(m => m.CardSiteTagAllowOverwrite)
+                        <label for="@Html.FieldIdFor(m => m.CardSiteTagAllowOverwrite)" class="forcheckbox">@T("Allow Author to Overwrite Site Twitter Handle")</label>
+                    </fieldset>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardSiteTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.CardSiteTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <button class="primaryAction" type="submit">@T("Save")</button>
+}
+

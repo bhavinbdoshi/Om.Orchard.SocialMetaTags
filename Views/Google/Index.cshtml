@@ -1,0 +1,67 @@
+﻿@model Om.Orchard.SocialMetaTags.ViewModels.GoogleIndexViewModel
+@{ 
+    Layout.Title = T("Social Meta Tags");
+    Style.Include("om-orchard-social-tags-admin.css");
+    Script.Require("jQuery");
+    Script.Include("social-tags-admin.js").AtFoot();
+}
+<h2>@T("Google Search Results Content Authorship and Publisher Meta Tags")</h2>
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend></legend>
+        <table class="items">
+            <colgroup>
+                <col id="Col1" />
+                <col id="Col2" />
+                <col id="Col3" />
+                <col id="Col4" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">@T("Authorship Meta Tags")</th>
+                    <th scope="col">@T("Enabled")</th>
+                    <th scope="col">@T("Required")</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>&lt;link <span class="boldTag">rel="author"</span> href={@T("Google+ Profie Url")} /&gt;
+                    <span class="hint">@T("Allows content author to specify Google+ Profile Url and adds profile Url with rel=author")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.AuthorRelTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.AuthorRelTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;link <span class="boldTag">rel="publisher"</span> href={@T("Google+ Business Page Url")} /&gt;
+                    <span class="hint">@T("Adds Google+ Business Page Url using rel=publiser")</span>
+                    <fieldset>
+                        <legend></legend>
+                        <label>@T("Set default value for Google+ Business Page Url")</label>
+                        @Html.LabelFor(m => m.PublisherRelTagPageUrl, T("Url"))
+                        @Html.TextBoxFor(m => m.PublisherRelTagPageUrl, new { @class = "text large", placeholder = "" })
+                        <span class="hint">@T("Must be valid Url") https://plus.google.com/{+PageId} </span>
+                    </fieldset>
+                    <fieldset>
+                        <legend></legend>
+                        @Html.CheckBoxFor(m => m.PublisherRelTagAllowOverWrite)
+                        <label for="@Html.FieldIdFor(m => m.PublisherRelTagAllowOverWrite)" class="forcheckbox">@T("Allow Author to Overwrite Google+ Business Page Url")</label>
+                        <span class="hint">@T("If checked content author can update url.")</span>
+                    </fieldset>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.PublisherRelTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.PublisherRelTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+   
+    <button class="primaryAction" type="submit">@T("Save")</button>
+}
+

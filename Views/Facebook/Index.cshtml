@@ -1,0 +1,144 @@
+﻿@model Om.Orchard.SocialMetaTags.ViewModels.FacebookIndexViewModel
+@{ 
+    Layout.Title = T("Social Meta Tags");
+    Style.Include("om-orchard-social-tags-admin.css");
+    Script.Require("jQuery");
+    Script.Include("social-tags-admin.js").AtFoot();
+}
+<h2>@T("Open Graph Meta Tags for Social Sharing on Facebook/Twitter/Google+/Linkedin/Pinterest")</h2>
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend></legend>
+        <table class="items">
+            <colgroup>
+                <col id="Col1" />
+                <col id="Col2" />
+                <col id="Col3" />
+                <col id="Col4" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">@T("Open Graph Meta Tags")</th>
+                    <th scope="col">@T("Enabled")</th>
+                    <th scope="col">@T("Required")</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:title</span>" content={@T("Title of content")} /&gt;
+                    <span class="hint">@T("Allows author to enter value of title")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgTitleTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgTitleTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:type</span>" content={@T("website or article or blog")} /&gt
+                    <span class="hint">@T("Allows author to select either type as website, blog or article")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgTypeTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgTypeTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:image</span>" content={@T("Image for content")} /&gt
+                    <span class="hint">@T("Allows author to link to image")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgImageTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgImageTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:url</span>" content={@T("Url for content")} /&gt
+                    <span class="hint">@T("Allows author to specify canonical url")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgUrlTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgUrlTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:description</span>" content={@T("Description for content")} /&gt
+                    <span class="hint">@T("Allows author to specify description for content")</span>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgDescriptionTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgDescriptionTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:locale</span>" content={@T("Locale")} /&gt
+                    <span class="hint">@T("Adds locale tag")</span>
+                    <fieldset>
+                        <legend>@T("Set default value for Locale Tag")</legend>
+                        <label>@T("Current Site Culture -") @Model.CurrentCulture</label>@Html.HiddenFor(m => m.CurrentCulture)
+                        @Html.LabelFor(m => m.OgLocaleTagValue, T("Locale"))
+                        @Html.TextBoxFor(m => m.OgLocaleTagValue, new { @class = "text" })
+                        <span class="hint">@T("Must be in language_TERRITORY format example: en_US")</span>
+                        @Html.CheckBoxFor(m => m.OgLocaleTagAllowOverwrite)
+                        <label for="@Html.FieldIdFor(m => m.OgLocaleTagAllowOverwrite)" class="forcheckbox">@T("Allow Author to Overwrite Locale")</label>
+                    </fieldset>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgLocaleTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgLocaleTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">og:site_name</span>" content={@T("Site Name ")} /&gt
+                    <span class="hint">@T("Allows author to specify locale")</span>
+                    <fieldset>
+                        <legend>@T("Set default value for site_name")</legend>
+                        <label>@T("Current Site Name -") @Model.CurrentSiteName</label>@Html.HiddenFor(m => m.CurrentSiteName)
+                        @Html.LabelFor(m => m.OgSiteNameTagValue, T("Site Name"))
+                        @Html.TextBoxFor(m => m.OgSiteNameTagValue, new { @class = "text medium" })
+                        <span class="hint">@T("Example IMDb")</span>
+                        @Html.CheckBoxFor(m => m.OgSiteNameTagAllowOverwrite)
+                        <label for="@Html.FieldIdFor(m => m.OgSiteNameTagAllowOverwrite)" class="forcheckbox">@T("Allow Author to Overwrite Site_Name")</label>
+                    </fieldset>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgSiteNameTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.OgSiteNameTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;meta property="<span class="boldTag">fb:admins</span>" content={@T("Comma separated facebook admin id")} /&gt
+                    <span class="hint">@T("fb admins for Facebook Insights")</span>
+                    <fieldset>
+                        <legend>@T("Set default value for fb:admins")</legend>
+                        @Html.LabelFor(m => m.FbAdminTagValue, T("FB Admins IDs"))
+                        @Html.TextBoxFor(m => m.FbAdminTagValue, new { @class = "text medium" })
+                        <span class="hint">@T("Comma separated IDs")</span>
+                        @Html.CheckBoxFor(m => m.FbAdminTagAllowOverwrite)
+                        <label for="@Html.FieldIdFor(m => m.FbAdminTagAllowOverwrite)" class="forcheckbox">@T("Allow Author to Overwrite FB:Admins")</label>
+                    </fieldset>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.FbAdminTagEnabled, new { @class = "socialmetatagEnabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.FbAdminTagRequired, new { @class = "socialmetatagRequired" })
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <button class="primaryAction" type="submit">@T("Save")</button>
+}

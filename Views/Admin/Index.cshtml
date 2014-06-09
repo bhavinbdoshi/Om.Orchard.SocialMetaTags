@@ -1,0 +1,19 @@
+﻿@{ Layout.Title = T("Social Meta Tags"); }
+
+<h2>@T("Social Meta Tags Settings Overview")</h2>
+<fieldset>
+    <legend>@T("Authorship Meta Tags")</legend>
+    <label>@T("Allows author to input Google Search Results Authorship related Meta Tags.")</label>
+    @Html.ActionLink(T("Configure").Text, "Index", "Google", new { }, new { }) @T("Google Authorship Meta Link Tags")
+</fieldset>
+<fieldset>
+    <legend>@T("Open Graph Meta Tags")</legend>
+    <label>@T("Allows author to input Open Graph (Facebook/Google/Twitter) related Social Share Meta Tags.")</label>
+    @Html.ActionLink(T("Configure").Text, "Index", "Facebook", new { }, new { }) @T("Open Graph Meta Tags")
+</fieldset>
+<fieldset>
+    <legend>@T("Summary Cards Meta Tags")</legend>
+    <label>@T("Allows author to input Twitter Summary Cards related Social Share Meta Tags.")</label>
+    @T(" Google Authorship Meta Link Tags")
+    @Html.ActionLink(T("Configure").Text, "Index", "Twitter", new { }, new { }) @T("Twitter Summary Cards Meta Tags")
+</fieldset>

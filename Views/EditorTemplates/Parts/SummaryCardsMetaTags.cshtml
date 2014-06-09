@@ -1,0 +1,62 @@
+﻿@model Om.Orchard.SocialMetaTags.Models.SummaryCardsMetaTagsPart
+@{
+    Style.Include("om-orchard-social-tags-admin.css");
+
+    var summarycardTypes = new SelectList(new object[] {
+        new { Id = "select", Text = T("Select One").Text },
+        new { Id = "summary", Text = T("summary").Text },
+        new { Id = "summary_large_image", Text = T("summary_large_image").Text  },
+    }, "Id", "Text", Model.CardType);
+}
+@if (Model.SummaryCardsTagsSettings.RenderOutput) {
+    <fieldset>
+        <legend>Twitter Summary Cards Meta Tags</legend>
+        @if (Model.SummaryCardsTagsSettings.CardTypeTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardType, T("Twitter Card Type"))
+                @Html.DropDownList("CardType", summarycardTypes)
+                <span class="hint"><span class="boldTag">twitter:card</span> @T("Select one: summary or summary_large_image")</span>
+            </div>
+        }
+        @if (Model.SummaryCardsTagsSettings.CardTitleTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardTitle, T("Twitter Card Title"))
+                @Html.TextBoxFor(m => m.CardTitle, new { @class = "text large" })
+                <span class="hint"><span class="boldTag">twitter:title</span> @T("Title length suggested 70 character or less")</span>
+            </div>
+        }
+        @if (Model.SummaryCardsTagsSettings.CardDescriptionTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardDescription, T("Twitter Card Description"))
+                @Html.TextAreaFor(m => m.CardDescription, new { @class = "text large" })
+                <span class="hint"><span class="boldTag">twitter:description</span> @T("Description of Content. Suggested 200 characters or less")</span>
+            </div>
+        }
+        @if (Model.SummaryCardsTagsSettings.CardImageTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardImage, T("Twitter Card Image Url"))
+                @Html.TextBoxFor(m => m.CardImage, new { @class = "text large" })
+                <span class="hint"><span class="boldTag">twitter:image</span> @T("Enter fully qualified URL for image either from Media Library or external Url to image")</span>
+            </div>
+        }
+        @if (Model.SummaryCardsTagsSettings.CardCreatorTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardCreator, T("Twitter Card Creator Twitter Handle"))
+                @Html.TextBoxFor(m => m.CardCreator, new { @class = "text medium" })
+                <span class="hint"><span class="boldTag">twitter:creator</span> @T("Enter twitter handle for author")</span>
+            </div>
+        }
+        @if (Model.SummaryCardsTagsSettings.CardSiteTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.CardSite, T("Twitter Card Site Twitter Handle"))
+                @if (Model.SummaryCardsTagsSettings.CardSiteTagAllowOverwrite) {
+                    @Html.TextBoxFor(m => m.CardSite, new { @class = "text medium" })
+                }
+                else {
+                    @Html.TextBoxFor(m => m.CardSite, new { @class = "text medium", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.CardSite) ? Model.SummaryCardsTagsSettings.CardSiteTagValue : Model.CardSite })
+                }
+                <span class="hint"><span class="boldTag">twitter:site</span> @T("Twitter handle for site/buisness")</span>
+            </div>
+        }
+    </fieldset>
+}
