@@ -49,11 +49,11 @@ Each tag can be enabled or required. Further few tags can be preset for all the 
 
 Showing below Open Graph Configuration:
 
-![alt tag]http://www.bhavindoshi.com/socialtags/og-1.JPG
+![alt tag](http://www.bhavindoshi.com/socialtags/og-1.JPG)
 
 Attaching Parts to Page Module:
 
-![alt tag]http://www.bhavindoshi.com/socialtags/three-part-selections.png
+![alt tag](http://www.bhavindoshi.com/socialtags/three-part-selections.png)
 
 
 Usage
@@ -61,16 +61,16 @@ Usage
 **Tags Input Screen for each content part**
 
 **Google Authorship**
-![alt tag]http://www.bhavindoshi.com/socialtags/screen2.jpg
+![alt tag](http://www.bhavindoshi.com/socialtags/screen2.jpg)
 
 **Open Graph Tags**
-![alt tag]http://www.bhavindoshi.com/socialtags/screen1.jpg
+![alt tag](http://www.bhavindoshi.com/socialtags/screen1.jpg)
 
 **Twitter Summary cards Tags**
-![alt tag]http://www.bhavindoshi.com/socialtags/screen3.jpg
+![alt tag](http://www.bhavindoshi.com/socialtags/screen3.jpg)
 
 **Output Tags Renderd**
-![alt tag]http://www.bhavindoshi.com/socialtags/screen4.jpg
+![alt tag](http://www.bhavindoshi.com/socialtags/screen4.jpg)
 
 
 
