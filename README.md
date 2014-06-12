@@ -7,11 +7,11 @@ Content part for Social Meta Tags (Open Graph Tags for Facebook/Google/Pinterest
 
 It has 3 attachable content part which can be attached to Page or Blog or BlogPost.
 
-**1) Authorship Meta Tags Part **
+**1) Authorship Meta Tags Part**
 
 This Content part renders author=rel and author=pulisher tag which is useful in Google Search Results Page. Using these tags do require one time verification by Google.
 
-**2) Open Graph Meta Tags Part **
+**2) Open Graph Meta Tags Part**
 
 Attaching this content part allows for basic Open Graph Meta Tags for Social Sharing on Facebook, Google+, Twitter, Linkedin, Pinterest. It has support for og:type, og:title, og:image, og:url, og:description, og:locale, og:site_name and fb:admins.
 
