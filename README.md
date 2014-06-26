@@ -21,13 +21,11 @@ Attaching this content part allows for meta tags for sharing on Twitter. This ha
 
 Version
 ----
-
 1.0
 
 
 Installation
 --------------
-
 ```sh
 Orchard Version Requirement: 1.8
 
@@ -36,6 +34,11 @@ Use Orchard Gallery to install the module.
 https://gallery.orchardproject.net/List/Modules/Orchard.Module.Om.Orchard.SocialMetaTags
 
 ```
+
+Demo Site Hosted on Windows Azure
+------------
+http://orchard-social-meta-tags-demo.azurewebsites.net/
+
 
 Configuration
 --------------
@@ -71,7 +74,6 @@ Usage
 
 **Output Tags Renderd**
 ![alt tag](http://www.bhavindoshi.com/socialtags/screen4.jpg)
-
 
 
 Tags Documenation & Verification Links
