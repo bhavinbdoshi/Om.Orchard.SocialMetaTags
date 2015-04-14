@@ -6,16 +6,23 @@ using Orchard.ContentManagement.Drivers;
 using Orchard.UI.Resources;
 using Om.Orchard.SocialMetaTags.Helpers;
 using System;
+using System.Collections.Generic;
+using Om.Orchard.SocialMetaTags.Settings;
 using Orchard.Localization;
+using Orchard.Tokens;
 
 namespace Om.Orchard.SocialMetaTags.Drivers {
     public class OpenGraphMetaTagsPartDriver : ContentPartDriver<OpenGraphMetaTagsPart> {
         private readonly IWorkContextAccessor _wca;
+        private readonly ITokenizer _tokenizer;
 
         public Localizer T { get; set; }
 
-        public OpenGraphMetaTagsPartDriver(IWorkContextAccessor wca) {
+        public OpenGraphMetaTagsPartDriver(
+            IWorkContextAccessor wca, 
+            ITokenizer tokenizer) {
             _wca = wca;
+            _tokenizer = tokenizer;
             T = NullLocalizer.Instance;
         }
 
@@ -26,34 +33,38 @@ namespace Om.Orchard.SocialMetaTags.Drivers {
         }
 
         protected override DriverResult Display(OpenGraphMetaTagsPart part, string displayType, dynamic shapeHelper) {
-            if (displayType != "Detail") return null;
+            if (displayType != "Detail") 
+                return null;
 
             var resourceManager = _wca.GetContext().Resolve<IResourceManager>();
-            var OpenGraphTagsSettings = _wca.GetContext().CurrentSite.As<OpenGraphMetaTagsSettingsPart>();
+            var openGraphTagsSettings = _wca.GetContext().CurrentSite.As<OpenGraphMetaTagsSettingsPart>();
+            var contentItem = part.ContentItem;
+            var dict = new Dictionary<string, object> {{"Content", contentItem}};
+            var defaultSettings = part.TypePartDefinition.Settings.GetModel<OpenGraphMetaTagsPartSettings>();
 
-            if (OpenGraphTagsSettings.RenderOutput) {
-                if (OpenGraphTagsSettings.OgTitleTagEnabled && !String.IsNullOrWhiteSpace(part.OgTitle))
-                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogtitlekey", "og:title", part.OgTitle));
+            if (openGraphTagsSettings.RenderOutput) {
+                if (openGraphTagsSettings.OgTitleTagEnabled && !String.IsNullOrWhiteSpace(GetValue(part.OgTitle, defaultSettings.OgDefaultTitle)))
+                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogtitlekey", "og:title", _tokenizer.Replace(GetValue(part.OgTitle, defaultSettings.OgDefaultTitle), dict)));
 
-                if (OpenGraphTagsSettings.OgTypeTagEnabled && part.OgType != "select")
-                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogtypekey", "og:type", part.OgType));
+                if (openGraphTagsSettings.OgTypeTagEnabled && part.OgType != "select" && defaultSettings.OgDefaultType != "select")
+                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogtypekey", "og:type", _tokenizer.Replace(GetValue(part.OgType, defaultSettings.OgDefaultType), dict)));
 
-                if (OpenGraphTagsSettings.OgImageTagEnabled && !String.IsNullOrWhiteSpace(part.OgImage))
-                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogimagekey", "og:image", part.OgImage));
+                if (openGraphTagsSettings.OgImageTagEnabled && !String.IsNullOrWhiteSpace(GetValue(part.OgImage, defaultSettings.OgDefaultImage)))
+                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogimagekey", "og:image", _tokenizer.Replace(GetValue(part.OgImage, defaultSettings.OgDefaultImage), dict)));
 
-                if (OpenGraphTagsSettings.OgUrlTagEnabled && !String.IsNullOrWhiteSpace(part.OgUrl))
-                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogurlkey", "og:url", part.OgUrl));
+                if (openGraphTagsSettings.OgUrlTagEnabled && !String.IsNullOrWhiteSpace(GetValue(part.OgUrl, defaultSettings.OgDefaultUrl)))
+                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogurlkey", "og:url", _tokenizer.Replace(GetValue(part.OgUrl, defaultSettings.OgDefaultUrl), dict)));
 
-                if (OpenGraphTagsSettings.OgDescriptionTagEnabled && !String.IsNullOrWhiteSpace(part.OgDescription))
-                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogdesckey", "og:description", part.OgDescription));
+                if (openGraphTagsSettings.OgDescriptionTagEnabled && !String.IsNullOrWhiteSpace(GetValue(part.OgDescription, defaultSettings.OgDefaultDescription)))
+                    resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogdesckey", "og:description", _tokenizer.Replace(GetValue(part.OgDescription, defaultSettings.OgDefaultDescription), dict)));
 
-                if (OpenGraphTagsSettings.OgLocaleTagEnabled && !String.IsNullOrWhiteSpace(part.OgLocale))
+                if (openGraphTagsSettings.OgLocaleTagEnabled && !String.IsNullOrWhiteSpace(part.OgLocale))
                     resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("oglocalekey", "og:locale", part.OgLocale));
 
-                if (OpenGraphTagsSettings.OgSiteNameTagEnabled && !String.IsNullOrWhiteSpace(part.OgSiteName))
+                if (openGraphTagsSettings.OgSiteNameTagEnabled && !String.IsNullOrWhiteSpace(part.OgSiteName))
                     resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("ogsitenamekey", "og:site_name", part.OgSiteName));
 
-                if (OpenGraphTagsSettings.FbAdminTagEnabled && !String.IsNullOrWhiteSpace(part.FBAdmins))
+                if (openGraphTagsSettings.FbAdminTagEnabled && !String.IsNullOrWhiteSpace(part.FBAdmins))
                     resourceManager.SetMeta(SocialMetaTagsHelpers.BuildPropertyMetaTag("fbadminskey", "fb:admins", part.FBAdmins));
             }
             return null;
@@ -61,6 +72,7 @@ namespace Om.Orchard.SocialMetaTags.Drivers {
 
         protected override DriverResult Editor(OpenGraphMetaTagsPart part, dynamic shapeHelper) {
             part.OpenGraphTagsSettings = _wca.GetContext().CurrentSite.As<OpenGraphMetaTagsSettingsPart>();
+            part.DefaultSettings = part.TypePartDefinition.Settings.GetModel<OpenGraphMetaTagsPartSettings>();
             return ContentShape("Parts_OpenGraphMetaTags_Edit",
                     () => shapeHelper.EditorTemplate(
                         TemplateName: "Parts/OpenGraphMetaTags",
@@ -71,6 +83,7 @@ namespace Om.Orchard.SocialMetaTags.Drivers {
         protected override DriverResult Editor(OpenGraphMetaTagsPart part, IUpdateModel updater, dynamic shapeHelper) {
             if (updater.TryUpdateModel(part, Prefix, null, null)) {
                 part.OpenGraphTagsSettings = _wca.GetContext().CurrentSite.As<OpenGraphMetaTagsSettingsPart>();
+                part.DefaultSettings = part.TypePartDefinition.Settings.GetModel<OpenGraphMetaTagsPartSettings>();
 
                 //Validation as per selections
                 if (part.OpenGraphTagsSettings.OgTitleTagEnabled && part.OpenGraphTagsSettings.OgTitleTagRequired
@@ -107,6 +120,13 @@ namespace Om.Orchard.SocialMetaTags.Drivers {
 
             }
             return Editor(part, shapeHelper);
+        }
+
+
+        private string GetValue(string userInput, string defaultValue) {
+            if(string.IsNullOrWhiteSpace(userInput))
+                return defaultValue;
+            return userInput;
         }
     }
 }

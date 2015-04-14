@@ -104,7 +104,7 @@
                     <span class="hint">@T("Allows author to specify locale")</span>
                     <fieldset>
                         <legend>@T("Set default value for site_name")</legend>
-                        <label>@T("Current Site Name -") @Model.CurrentSiteName</label>@Html.HiddenFor(m => m.CurrentSiteName)
+                        <label>@T("Current Site Name -") @Model.CurrentSiteName</label>@Html.Hidden("CurrentSiteName", Html.Encode(Model.CurrentSiteName))
                         @Html.LabelFor(m => m.OgSiteNameTagValue, T("Site Name"))
                         @Html.TextBoxFor(m => m.OgSiteNameTagValue, new { @class = "text medium" })
                         <span class="hint">@T("Example IMDb")</span>

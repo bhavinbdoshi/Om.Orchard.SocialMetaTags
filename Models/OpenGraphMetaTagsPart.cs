@@ -1,10 +1,12 @@
-﻿using Orchard.ContentManagement;
+﻿using Om.Orchard.SocialMetaTags.Settings;
+using Orchard.ContentManagement;
 using Orchard.Environment.Extensions;
 
 namespace Om.Orchard.SocialMetaTags.Models {
     [OrchardFeature("Om.Orchard.SocialMetaTags")]
     public class OpenGraphMetaTagsPart : ContentPart {
         public OpenGraphMetaTagsSettingsPart OpenGraphTagsSettings { get; set; }
+        public OpenGraphMetaTagsPartSettings DefaultSettings { get; set; }
 
         public string OgTitle {
             get { return this.Retrieve(x => x.OgTitle, "", true); }
