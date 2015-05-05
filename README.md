@@ -1,3 +1,8 @@
+Version/Branch Info
+=========
+Version 1.1 is available on 1.1 Branch. Requires Orchard 1.9 (as it targes .NET Framework 4.5.1)
+Version 1.0 is available on 1.0/Master Branch. Requires Orchard 1.8
+
 Social Meta Tags - Orchard CMS Module
 =========
 
