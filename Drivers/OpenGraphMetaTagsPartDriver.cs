@@ -92,7 +92,7 @@ namespace Om.Orchard.SocialMetaTags.Drivers {
 
                 if (part.OpenGraphTagsSettings.OgTypeTagEnabled && part.OpenGraphTagsSettings.OgTypeTagRequired
                     && part.OgType == "select")
-                    updater.AddModelError("_FORM", T("Open Grpah Type field is required"));
+                    updater.AddModelError("_FORM", T("Open Graph Type field is required"));
 
                 if (part.OpenGraphTagsSettings.OgImageTagEnabled && part.OpenGraphTagsSettings.OgImageTagRequired
                     && String.IsNullOrWhiteSpace(part.OgImage))
