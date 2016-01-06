@@ -27,7 +27,7 @@
             @if (Model.OpenGraphTagsSettings.OgTypeTagEnabled)
             {
                 <div>
-                    @Html.LabelFor(m => m.OgType, T("Open Grpah Type")) 
+                    @Html.LabelFor(m => m.OgType, T("Open Graph Type")) 
                     @Html.DropDownList("OgType", ogTypes)
                     <span class="hint"><span class="boldTag">og:type</span> @T("Select one: article, website or blog") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultType</span>
                 </div>
