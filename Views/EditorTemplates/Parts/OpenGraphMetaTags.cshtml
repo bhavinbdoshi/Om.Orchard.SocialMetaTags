@@ -10,79 +10,110 @@
     }, "Id", "Text", Model.OgType);
 }
 
-@if (Model.OpenGraphTagsSettings.RenderOutput) {
-    <fieldset>
-        <legend>Open Graph Meta Tags</legend>
-        @if (Model.OpenGraphTagsSettings.OgTitleTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgTitle, T("Open Graph Title"))
-                @Html.TextBoxFor(m => m.OgTitle, new { @class = "text large" })
-                <span class="hint"><span class="boldTag">og:title</span> @T("Title length suggested 95 character or less")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgTypeTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgType, T("Open Grpah Type"))
-                @Html.DropDownList("OgType", ogTypes)
-                <span class="hint"><span class="boldTag">og:type</span> @T("Select one: article, website or blog")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgImageTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgImage, T("Open Graph Image Url"))
-                @Html.TextBoxFor(m => m.OgImage, new { @class = "text large" })
-                <span class="hint"><span class="boldTag">og:image</span> @T("Enter fully qualified URL for image either from Media Library or external Url to image")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgUrlTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgUrl, T("Open Graph Canonical Url"))
-                @Html.TextBoxFor(m => m.OgUrl, new { @class = "text large" })
-                <span class="hint"><span class="boldTag">og:url</span> @T("Enter canonical url")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgDescriptionTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgDescription, T("Open Graph Description"))
-                @Html.TextAreaFor(m => m.OgDescription, new { @class = "text" })
-                <span class="hint"><span class="boldTag">og:description</span> @T("Enter description for content. Suggested 300 characters or less")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgLocaleTagRequired) {
-            <div>
-                @Html.LabelFor(m => m.OgLocale, T("Open Graph Locale"))
-                @if (Model.OpenGraphTagsSettings.OgLocaleTagAllowOverwrite) {
-                    @Html.TextBoxFor(m => m.OgLocale, new { @class = "text small" })
-                }
-                else {
-                    @Html.TextBoxFor(m => m.OgLocale, new { @class = "text small", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.OgLocale) ? Model.OpenGraphTagsSettings.OgLocaleTagValue : Model.OgLocale })
-                }
-                <span class="hint"><span class="boldTag">og:locale</span> @T("Enter locale as language_TERRITORY format example: en_US")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.OgSiteNameTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.OgSiteName, T("Open Graph Site Name"))
-                @if (Model.OpenGraphTagsSettings.OgSiteNameTagAllowOverwrite) {
-                    @Html.TextBoxFor(m => m.OgSiteName, new { @class = "text medium" })
-                }
-                else {
-                    @Html.TextBoxFor(m => m.OgSiteName, new { @class = "text medium", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.OgSiteName) ? Model.OpenGraphTagsSettings.OgSiteNameTagValue : Model.OgSiteName })
-                }
-                <span class="hint"><span class="boldTag">og:site_name</span> @T("Enter site_name")</span>
-            </div>
-        }
-        @if (Model.OpenGraphTagsSettings.FbAdminTagEnabled) {
-            <div>
-                @Html.LabelFor(m => m.FBAdmins, T("Facebook Admins"))
-                @if (Model.OpenGraphTagsSettings.FbAdminTagAllowOverwrite) {
-                    @Html.TextBoxFor(m => m.FBAdmins, new { @class = "text medium" })
-                }
-                else {
-                    @Html.TextBoxFor(m => m.FBAdmins, new { @class = "text medium", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.FBAdmins) ? Model.OpenGraphTagsSettings.FbAdminTagValue : Model.FBAdmins })    
-                }
-                <span class="hint"><span class="boldTag">fb:admins</span> @T("Enter Comma separated IDs fb admin ids")</span>
-            </div>
-        }
-    </fieldset>
+@if (Model.OpenGraphTagsSettings.RenderOutput)
+{
+    <div class="override-ogmt">
+        <h4>Overrite Open Graph Meta Tags</h4>
+        <fieldset class="details">
+
+            @if (Model.OpenGraphTagsSettings.OgTitleTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgTitle, T("Open Graph Title"))
+                    @Html.TextBoxFor(m => m.OgTitle, new { @class = "text large" })
+                    <span class="hint"><span class="boldTag">og:title</span> @T("Title length suggested 95 character or less") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultTitle</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgTypeTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgType, T("Open Grpah Type")) 
+                    @Html.DropDownList("OgType", ogTypes)
+                    <span class="hint"><span class="boldTag">og:type</span> @T("Select one: article, website or blog") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultType</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgImageTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgImage, T("Open Graph Image Url"))
+                    @Html.TextBoxFor(m => m.OgImage, new { @class = "text large" })
+                    <span class="hint"><span class="boldTag">og:image</span> @T("Enter fully qualified URL for image either from Media Library or external Url to image") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultImage</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgUrlTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgUrl, T("Open Graph Canonical Url"))
+                    @Html.TextBoxFor(m => m.OgUrl, new { @class = "text large" })
+                    <span class="hint"><span class="boldTag">og:url</span> @T("Enter canonical url") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultUrl</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgDescriptionTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgDescription, T("Open Graph Description"))
+                    @Html.TextAreaFor(m => m.OgDescription, new { @class = "text" })
+                    <span class="hint"><span class="boldTag">og:description</span> @T("Enter description for content. Suggested 300 characters or less") | <span class="boldTag">@T("Default Value:")</span> @Model.DefaultSettings.OgDefaultDescription</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgLocaleTagRequired)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgLocale, T("Open Graph Locale"))
+                    @if (Model.OpenGraphTagsSettings.OgLocaleTagAllowOverwrite)
+                    {
+                        @Html.TextBoxFor(m => m.OgLocale, new { @class = "text small" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.OgLocale, new { @class = "text small", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.OgLocale) ? Model.OpenGraphTagsSettings.OgLocaleTagValue : Model.OgLocale })
+                    }
+                    <span class="hint"><span class="boldTag">og:locale</span> @T("Enter locale as language_TERRITORY format example: en_US")</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.OgSiteNameTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.OgSiteName, T("Open Graph Site Name"))
+                    @if (Model.OpenGraphTagsSettings.OgSiteNameTagAllowOverwrite)
+                    {
+                        @Html.TextBoxFor(m => m.OgSiteName, new { @class = "text medium" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.OgSiteName, new { @class = "text medium", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.OgSiteName) ? Model.OpenGraphTagsSettings.OgSiteNameTagValue : Model.OgSiteName })
+                    }
+                    <span class="hint"><span class="boldTag">og:site_name</span> @T("Enter site_name")</span>
+                </div>
+            }
+            @if (Model.OpenGraphTagsSettings.FbAdminTagEnabled)
+            {
+                <div>
+                    @Html.LabelFor(m => m.FBAdmins, T("Facebook Admins"))
+                    @if (Model.OpenGraphTagsSettings.FbAdminTagAllowOverwrite)
+                    {
+                        @Html.TextBoxFor(m => m.FBAdmins, new { @class = "text medium" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.FBAdmins, new { @class = "text medium", @readonly = "readonly", @Value = String.IsNullOrWhiteSpace(Model.FBAdmins) ? Model.OpenGraphTagsSettings.FbAdminTagValue : Model.FBAdmins })
+                    }
+                    <span class="hint"><span class="boldTag">fb:admins</span> @T("Enter Comma separated IDs fb admin ids")</span>
+                </div>
+            }
+        </fieldset>
+    </div>
+
+    using (Script.Foot())
+    {
+
+        <script type="text/javascript">
+            //<![CDATA[
+            (function ($) {
+                $(".override-ogmt h4").expandoControl(function (controller) { return controller.nextAll(".details"); }, { collapse: true, remember: false });
+            })(jQuery);
+            //]]>
+        </script>
+
+    }
 }
