@@ -26,6 +26,7 @@ Attaching this content part allows for basic Open Graph Meta Tags for Social Sha
 Attaching this content part allows for meta tags for sharing on Twitter. This has support for twitter:card, twitter:title, twitter:description, twitter:image, twitter:creator, twitter:site. Using these tags require one time verification by Twitter.
 
 
+
 Installation
 --------------
 ```sh
