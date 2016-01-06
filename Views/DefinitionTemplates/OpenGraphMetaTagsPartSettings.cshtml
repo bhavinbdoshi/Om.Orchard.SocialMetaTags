@@ -1,0 +1,54 @@
+﻿@model Om.Orchard.SocialMetaTags.Settings.OpenGraphMetaTagsPartSettings
+
+@{
+    Style.Include("om-orchard-social-tags-admin.css");
+
+    var ogTypes = new SelectList(new object[] {
+        new { Id = "select", Text = T("Select One").Text },
+        new { Id = "website", Text = T("website").Text },
+        new { Id = "article", Text = T("artice").Text  },
+        new { Id = "blog", Text = T("blog").Text },
+    }, "Id", "Text", Model.OgDefaultType);
+}
+
+@if (Model.OpenGraphTagsSettings.RenderOutput)
+{
+    <fieldset>
+        <h4>Default Settings:</h4>
+        @if (Model.OpenGraphTagsSettings.OgTitleTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.OgDefaultTitle, T("Open Graph Title"))
+                @Html.TextBoxFor(m => m.OgDefaultTitle, new {@class = "text large tokenized"})
+                <span class="hint"><span class="boldTag">og:title</span> @T("Title length suggested 95 character or less")</span>
+            </div>
+        }
+        @if (Model.OpenGraphTagsSettings.OgTypeTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.OgDefaultType, T("Open Grpah Type"))
+                @Html.DropDownListFor(m => m.OgDefaultType, ogTypes)
+                <span class="hint"><span class="boldTag">og:type</span> @T("Select one: article, website or blog")</span>
+            </div>
+        }
+        @if (Model.OpenGraphTagsSettings.OgImageTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.OgDefaultImage, T("Open Graph Image Url"))
+                @Html.TextBoxFor(m => m.OgDefaultImage, new {@class = "text large tokenized"})
+                <span class="hint"><span class="boldTag">og:image</span> @T("Enter fully qualified URL for image either from Media Library or external Url to image")</span>
+            </div>
+        }
+        @if (Model.OpenGraphTagsSettings.OgUrlTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.OgDefaultUrl, T("Open Graph Canonical Url"))
+                @Html.TextBoxFor(m => m.OgDefaultUrl, new {@class = "text large tokenized"})
+                <span class="hint"><span class="boldTag">og:url</span> @T("Enter canonical url")</span>
+            </div>
+        }
+        @if (Model.OpenGraphTagsSettings.OgDescriptionTagEnabled) {
+            <div>
+                @Html.LabelFor(m => m.OgDefaultDescription, T("Open Graph Description"))
+                @Html.TextAreaFor(m => m.OgDefaultDescription, new {@class = "text tokenized"})
+                <span class="hint"><span class="boldTag">og:description</span> @T("Enter description for content. Suggested 300 characters or less")</span>
+            </div>
+        }
+    </fieldset>
+}

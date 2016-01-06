@@ -1,3 +1,7 @@
 ﻿.boldTag {
     font-weight:bold;
 }
+
+.override-ogmt {
+    margin-bottom: 15px;
+}
