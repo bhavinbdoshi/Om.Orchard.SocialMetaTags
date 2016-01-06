@@ -1,7 +1,8 @@
 Version/Branch Info
 =========
-Version 1.1 is available on 1.1 Branch. Requires Orchard 1.9 (as it targes .NET Framework 4.5.1)
-Version 1.0 is available on 1.0/Master Branch. Requires Orchard 1.8
+Version 1.0 is available on Master Branch
+Version 1.8 is available on Orchard.1.8.Version Branch (Stable)
+Version 1.9 is available on Orchard.1.8.Version Branch (Stable)
 
 Social Meta Tags - Orchard CMS Module
 =========
@@ -24,19 +25,17 @@ Attaching this content part allows for basic Open Graph Meta Tags for Social Sha
 
 Attaching this content part allows for meta tags for sharing on Twitter. This has support for twitter:card, twitter:title, twitter:description, twitter:image, twitter:creator, twitter:site. Using these tags require one time verification by Twitter.
 
-Version
-----
-1.0
-
 
 Installation
 --------------
 ```sh
-Orchard Version Requirement: 1.8
+Orchard Version Requirement: 1.8 and 1.9
 
 Use Orchard Gallery to install the module. 
 
 https://gallery.orchardproject.net/List/Modules/Orchard.Module.Om.Orchard.SocialMetaTags
+
+https://gallery.orchardproject.net/Packages/Orchard.Module.Om.Orchard.SocialMetaTags/
 
 ```
 
@@ -63,6 +62,11 @@ Attaching Parts to Page Module:
 
 ![alt tag](http://www.bhavindoshi.com/socialtags/three-part-selections.png)
 
+Also for Open Graphs you can set Tokenized Default Values or standard values. This can be set when Part is added to Page Content. 
+
+![alt tag](http://www.bhavindoshi.com/socialtags/Open Graphs Default Values.png)
+
+Note: If you are using tokenized default values, make sure you don't set them required in Configuration else you will see required value error.
 
 Usage
 -------------
