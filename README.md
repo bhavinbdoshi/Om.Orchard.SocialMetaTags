@@ -2,10 +2,11 @@ Version/Branch Info
 =========
 Version 1.0 is available on Master Branch
 
-Version 1.8 is available on Orchard.1.8.Version Branch (Stable)
+Version 1.8 is available on Orchard.1.8.Version Branch (Stable) (Target framework 4.5)
 
-Version 1.9 is available on Orchard.1.8.Version Branch (Stable)
+Version 1.9 is available on Orchard.1.9.Version Branch (Stable) (Target framework 4.5.1)
 
+Version 1.10 is available on Orchard-1.10.Version Branch (Stable) (Target framework 4.5.2)
 
 Social Meta Tags - Orchard CMS Module
 =========
