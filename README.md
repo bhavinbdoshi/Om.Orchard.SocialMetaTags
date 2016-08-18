@@ -4,8 +4,9 @@ Version 1.0 is available on Master Branch
 
 Version 1.8 is available on Orchard.1.8.Version Branch (Stable)
 
-Version 1.9 is available on Orchard.1.8.Version Branch (Stable)
+Version 1.9 is available on Orchard.1.9.Version Branch (Stable)
 
+Version 1.10 is available on Orchard.1.10.Version Branch (Stable)
 
 Social Meta Tags - Orchard CMS Module
 =========
@@ -33,7 +34,7 @@ Attaching this content part allows for meta tags for sharing on Twitter. This ha
 Installation
 --------------
 ```sh
-Orchard Version Requirement: 1.8 and 1.9
+Orchard Version Requirement: 1.8, 1.9 or 1.10
 
 Use Orchard Gallery to install the module. 
 
