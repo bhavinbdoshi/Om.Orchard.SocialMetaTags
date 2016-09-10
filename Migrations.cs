@@ -32,4 +32,10 @@ namespace Om.Orchard.SocialMetaTags.Migrations {
             return 1;
         }
     }
+
+
+    
+
+
+
 }

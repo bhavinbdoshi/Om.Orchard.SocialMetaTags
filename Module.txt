@@ -9,4 +9,4 @@ Features:
 	Om.Orchard.SocialMetaTags:
 		Description: Content part for Social Meta Tags (Open Graph Tags for Facebook/Google/Pinterest/Linkedin and Twitter Card Tags and Google Authorship).
 		Category: Content
-		Dependencies: Orchard.jQuery
+		Dependencies: Orchard.Resources
